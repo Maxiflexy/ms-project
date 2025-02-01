@@ -56,8 +56,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employee.getDepartmentCode());
 
         // using rest template to make a get request call
-        ResponseEntity<DepartmentDTO> responseEntity = restTemplate.getForEntity
-                ("http://localhost:8080/api/departments/" + employee.getDepartmentCode(), DepartmentDTO.class);
+//        ResponseEntity<DepartmentDTO> responseEntity = restTemplate.getForEntity
+//                ("http://localhost:8080/api/departments/" + employee.getDepartmentCode(), DepartmentDTO.class);
         //DepartmentDTO departmentDTO = responseEntity.getBody();
 
 
