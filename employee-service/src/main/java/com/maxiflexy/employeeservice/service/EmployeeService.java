@@ -1,8 +1,9 @@
 package com.maxiflexy.employeeservice.service;
 
-import com.maxiflexy.employeeservice.dro.EmployeeDTO;
+import com.maxiflexy.employeeservice.dto.ApiResponseDTO;
+import com.maxiflexy.employeeservice.dto.EmployeeDTO;
 
 public interface EmployeeService {
     EmployeeDTO saveEmployee(EmployeeDTO employeeDTO);
-    EmployeeDTO getEmployeeById(Long employeeId);
+    ApiResponseDTO getEmployeeById(Long employeeId);
 }

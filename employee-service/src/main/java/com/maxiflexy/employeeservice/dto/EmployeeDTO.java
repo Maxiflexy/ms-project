@@ -1,4 +1,4 @@
-package com.maxiflexy.employeeservice.dro;
+package com.maxiflexy.employeeservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,4 +14,5 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private String departmentCode;
 }

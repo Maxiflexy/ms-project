@@ -1,6 +1,7 @@
 package com.maxiflexy.employeeservice.controller;
 
-import com.maxiflexy.employeeservice.dro.EmployeeDTO;
+import com.maxiflexy.employeeservice.dto.ApiResponseDTO;
+import com.maxiflexy.employeeservice.dto.EmployeeDTO;
 import com.maxiflexy.employeeservice.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,10 @@ public class EmployeeController {
     }
 
     @GetMapping("{employee-id}")
-    public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable("employee-id") Long id){
-        EmployeeDTO employeeDTO = employeeService.getEmployeeById(id);
+    public ResponseEntity<ApiResponseDTO> getEmployee(@PathVariable("employee-id") Long id){
+        ApiResponseDTO apiResponseDTO = employeeService.getEmployeeById(id);
 
-        return ResponseEntity.ok(employeeDTO);
+        return ResponseEntity.ok(apiResponseDTO);
     }
 
 }
