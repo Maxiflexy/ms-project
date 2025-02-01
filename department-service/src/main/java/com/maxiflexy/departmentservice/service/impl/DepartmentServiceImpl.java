@@ -2,6 +2,7 @@ package com.maxiflexy.departmentservice.service.impl;
 
 import com.maxiflexy.departmentservice.dto.DepartmentDTO;
 import com.maxiflexy.departmentservice.entity.Department;
+import com.maxiflexy.departmentservice.mapper.DepartmentMapper;
 import com.maxiflexy.departmentservice.repository.DepartmentRepository;
 import com.maxiflexy.departmentservice.service.DepartmentService;
 import lombok.AllArgsConstructor;
@@ -18,32 +19,17 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDTO saveDepartment(DepartmentDTO departmentDTO) {
 
-        Department department = new Department(
-                departmentDTO.getId(),
-                departmentDTO.getDepartmentName(),
-                departmentDTO.getDepartmentDescription(),
-                departmentDTO.getDepartmentCode()
-        );
+        Department department = DepartmentMapper.mapToDepartment(departmentDTO);
 
         Department savedDepartment = departmentRepository.save(department);
 
-        return new DepartmentDTO(
-                savedDepartment.getId(),
-                savedDepartment.getDepartmentName(),
-                savedDepartment.getDepartmentDescription(),
-                savedDepartment.getDepartmentCode()
-        );
+        return DepartmentMapper.mapToDepartmentDTO(savedDepartment);
     }
 
     @Override
     public DepartmentDTO getDepartmentByCode(String code) {
         Department department = departmentRepository.findByDepartmentCode(code);
 
-        return new DepartmentDTO(
-                department.getId(),
-                department.getDepartmentName(),
-                department.getDepartmentDescription(),
-                department.getDepartmentCode()
-        );
+        return DepartmentMapper.mapToDepartmentDTO(department);
     }
 }

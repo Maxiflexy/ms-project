@@ -4,6 +4,7 @@ import com.maxiflexy.employeeservice.dto.ApiResponseDTO;
 import com.maxiflexy.employeeservice.dto.DepartmentDTO;
 import com.maxiflexy.employeeservice.dto.EmployeeDTO;
 import com.maxiflexy.employeeservice.entity.Employee;
+import com.maxiflexy.employeeservice.mapper.EmployeeMapper;
 import com.maxiflexy.employeeservice.repository.EmployeeRepository;
 import com.maxiflexy.employeeservice.service.APIClient;
 import com.maxiflexy.employeeservice.service.EmployeeService;
@@ -28,39 +29,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee(
-                employeeDTO.getId(),
-                employeeDTO.getFirstName(),
-                employeeDTO.getLastName(),
-                employeeDTO.getEmail(),
-                employeeDTO.getDepartmentCode()
-        );
+        Employee employee = EmployeeMapper.mapToEmployee(employeeDTO);
 
         Employee savedEmployee = employeeRepository.save(employee);
 
 
-        return new EmployeeDTO(
-                savedEmployee.getId(),
-                savedEmployee.getFirstName(),
-                savedEmployee.getLastName(),
-                savedEmployee.getEmail(),
-                savedEmployee.getDepartmentCode()
-        );
+        return EmployeeMapper.mapToEmployeeDTO(savedEmployee);
     }
 
     @CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment") // you can use either circuit breaker or the retry pattern
-    @Retry(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment")
+    //@Retry(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment")
     @Override
     public ApiResponseDTO getEmployeeById(Long employeeId) {
         log.info("inside getEmployee by id method");
         Employee employee = employeeRepository.findById(employeeId).get();
 
-        EmployeeDTO employeeDTO = new EmployeeDTO(
-                employee.getId(),
-                employee.getFirstName(),
-                employee.getLastName(),
-                employee.getEmail(),
-                employee.getDepartmentCode());
+        EmployeeDTO employeeDTO = EmployeeMapper.mapToEmployeeDTO(employee);
 
         // using rest template to make a get request call
 //        ResponseEntity<DepartmentDTO> responseEntity = restTemplate.getForEntity
@@ -97,13 +81,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         departmentDTO.setDepartmentCode("RD001");
         departmentDTO.setDepartmentDescription("Research and Development department");
 
-        EmployeeDTO employeeDTO = new EmployeeDTO(
-                employee.getId(),
-                employee.getFirstName(),
-                employee.getLastName(),
-                employee.getEmail(),
-                employee.getDepartmentCode());
-
+        EmployeeDTO employeeDTO = EmployeeMapper.mapToEmployeeDTO(employee);
 
         ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
         apiResponseDTO.setEmployeeDTO(employeeDTO);
