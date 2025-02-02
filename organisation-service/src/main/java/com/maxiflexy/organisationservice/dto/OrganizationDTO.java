@@ -4,10 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 
 @Builder
-public record OrganizationDTO (
-        Long id,
-        String organizationName,
-        String organizationDescription,
-        String organizationCode,
-        String createdDate
-){ }
+@Data
+public class OrganizationDTO {
+    private Long id;
+    private String organizationName;
+    private String organizationDescription;
+    private String organizationCode;
+    private String createdDate;
+}

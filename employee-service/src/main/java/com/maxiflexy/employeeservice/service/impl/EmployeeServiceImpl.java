@@ -92,9 +92,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         EmployeeDTO employeeDTO = EmployeeMapper.mapToEmployeeDTO(employee);
 
+        OrganizationDTO organizationDTO = new OrganizationDTO();
+        //organizationDTO
+
+
         ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
         apiResponseDTO.setEmployeeDTO(employeeDTO);
         apiResponseDTO.setDepartmentDTO(departmentDTO);
+        apiResponseDTO.setOrganizationDTO(organizationDTO);
 
         return apiResponseDTO;
     }

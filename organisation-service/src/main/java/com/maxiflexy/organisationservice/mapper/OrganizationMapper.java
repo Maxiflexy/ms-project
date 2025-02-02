@@ -17,11 +17,11 @@ public class OrganizationMapper {
 
     public static Organization mapToOrganization(OrganizationDTO organizationDTO){
         return Organization.builder()
-                .id(organizationDTO.id())
-                .organizationName(organizationDTO.organizationName())
-                .organizationDescription(organizationDTO.organizationDescription())
-                .organizationCode(organizationDTO.organizationCode())
-                .createdDate(organizationDTO.createdDate())
+                .id(organizationDTO.getId())
+                .organizationName(organizationDTO.getOrganizationName())
+                .organizationDescription(organizationDTO.getOrganizationDescription())
+                .organizationCode(organizationDTO.getOrganizationCode())
+                .createdDate(organizationDTO.getCreatedDate())
                 .build();
     }
 }
