@@ -3,6 +3,7 @@ package com.maxiflexy.employeeservice.service.impl;
 import com.maxiflexy.employeeservice.dto.ApiResponseDTO;
 import com.maxiflexy.employeeservice.dto.DepartmentDTO;
 import com.maxiflexy.employeeservice.dto.EmployeeDTO;
+import com.maxiflexy.employeeservice.dto.OrganizationDTO;
 import com.maxiflexy.employeeservice.entity.Employee;
 import com.maxiflexy.employeeservice.mapper.EmployeeMapper;
 import com.maxiflexy.employeeservice.repository.EmployeeRepository;
@@ -63,11 +64,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
         // using feign client to make a get request call
+
         DepartmentDTO departmentDTO = feignClient.getDepartment(employee.getDepartmentCode());
+
+        OrganizationDTO organizationDTO = webClient.get()
+                .uri("http://localhost:8083/api/organizations/" + employeeDTO.getOrganizationCode())
+                .retrieve()
+                .bodyToMono(OrganizationDTO.class)
+                .block();
 
         ApiResponseDTO apiResponseDTO = new ApiResponseDTO();
         apiResponseDTO.setEmployeeDTO(employeeDTO);
         apiResponseDTO.setDepartmentDTO(departmentDTO);
+        apiResponseDTO.setOrganizationDTO(organizationDTO);
 
         return apiResponseDTO;
     }

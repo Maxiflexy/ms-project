@@ -6,4 +6,5 @@ import lombok.Data;
 public class ApiResponseDTO {
     private EmployeeDTO employeeDTO;
     private DepartmentDTO departmentDTO;
+    private OrganizationDTO organizationDTO;
 }
